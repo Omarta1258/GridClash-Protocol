@@ -1,0 +1,1 @@
+#Marks the src/ folder as a Python package, allowing to import modules
