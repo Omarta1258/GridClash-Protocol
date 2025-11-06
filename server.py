@@ -1,3 +1,10 @@
+# We need to:
+# 1. Snapshot Frequency
+# 2. Msg format
+# 3. GUI/Game
+# 4. Fuck Beder
+
+
 import socket
 import time
 import struct
@@ -45,4 +52,17 @@ while True:
                                    int(time.time() * 1000), len(snapshot_data))
             serverSocket.sendto(response + snapshot_data, client_addr)
 
-#    time.wait(1/frequency)
+# def broadcast_snapshots():
+#     """Periodically broadcast current game state to all clients."""
+#     while True:
+#         snapshot_str = str(game_state).encode()
+#         for client in list(clients):
+#             snapshot_packet = struct.pack(
+#                 HEADER_FORMAT, b'GCLP', 1, 2, 0, 0,
+#                 int(time.time() * 1000), len(snapshot_str)
+#             )
+#             serverSocket.sendto(snapshot_packet + snapshot_str, client)
+#         time.sleep(TICK_INTERVAL)
+#
+# # Start broadcasting in a background thread
+# threading.Thread(target=broadcast_snapshots, daemon=True).start()
