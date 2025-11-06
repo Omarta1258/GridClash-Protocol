@@ -34,6 +34,24 @@ for i in range(5):
     snapshot_data = response[HEADER_SIZE:HEADER_SIZE + header[6]]
     print(f"Received SNAPSHOT {header[3]}: {snapshot_data.decode()}")
 
-    time.sleep(1)
+    time.sleep(1/20)
 
 clientSocket.close()
+
+
+
+
+# def broadcast_snapshots():
+#     """Periodically broadcast current game state to all clients."""
+#     while True:
+#         snapshot_str = str(game_state).encode()
+#         for client in list(clients):
+#             snapshot_packet = struct.pack(
+#                 HEADER_FORMAT, b'GCLP', 1, 2, 0, 0,
+#                 int(time.time() * 1000), len(snapshot_str)
+#             )
+#             serverSocket.sendto(snapshot_packet + snapshot_str, client)
+#         time.sleep(TICK_INTERVAL)
+#
+# # Start broadcasting in a background thread
+# threading.Thread(target=broadcast_snapshots, daemon=True).start()
