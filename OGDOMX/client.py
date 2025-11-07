@@ -11,7 +11,7 @@ HEADER_FORMAT = '!4s B B I I Q H'
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 
 # Send INIT message
-init_packet = struct.pack(HEADER_FORMAT, b'GCLP', 1, 0, 0, 0, int(time.time() * 1000), 0)
+init_packet = struct.pack(HEADER_FORMAT, b'DOMX', 1, 0, 0, 0, int(time.time() * 1000), 0)
 clientSocket.sendto(init_packet, (serverName, serverPort))
 print("Sent INIT message")
 
@@ -23,7 +23,7 @@ print(f"Received ACK: msg_type={header[2]}")
 # Send DATA messages (simulate game events)
 for i in range(5):
     game_event = f"ACQUIRE cell_{i}".encode()
-    data_packet = struct.pack(HEADER_FORMAT, b'GCLP', 1, 1, 0, i,
+    data_packet = struct.pack(HEADER_FORMAT, b'DOMX', 1, 1, 0, i,
                               int(time.time() * 1000), len(game_event))
     clientSocket.sendto(data_packet + game_event, (serverName, serverPort))
     print(f"Sent DATA: {game_event.decode()}")
