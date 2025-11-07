@@ -35,7 +35,7 @@ while True:
         print(f"[INIT] Client connected: {clientAddress}")
 
         # Send ACK back
-        response = struct.pack(HEADER_FORMAT, b'GCLP', 1, 2, 0, 0, int(time.time() * 1000), 0)
+        response = struct.pack(HEADER_FORMAT, b'DOMX', 1, 2, 0, 0, int(time.time() * 1000), 0)
         serverSocket.sendto(response, clientAddress)
 
     # Handle DATA message (game events like cell acquisition)
@@ -47,7 +47,7 @@ while True:
         snapshot_id += 1
         for client_addr in clients:
             snapshot_data = f"Snapshot {snapshot_id}".encode()
-            response = struct.pack(HEADER_FORMAT, b'GCLP', 1, 3, snapshot_id,
+            response = struct.pack(HEADER_FORMAT, b'DOMX', 1, 3, snapshot_id,
                                    clients[client_addr]['seq'],
                                    int(time.time() * 1000), len(snapshot_data))
             serverSocket.sendto(response + snapshot_data, client_addr)
